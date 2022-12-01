@@ -8,6 +8,8 @@ public class SpringbootFoodAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootFoodAppApplication.class, args);
+		
+		
 	}
 
 }

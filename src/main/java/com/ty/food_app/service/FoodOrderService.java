@@ -58,7 +58,7 @@ public class FoodOrderService {
 			foodOrder.setTotalCost(totalCost);
 
 			responseStructure.setStatus(HttpStatus.CREATED.value());
-			responseStructure.setMessage("saved");
+			responseStructure.setMessage("updated");
 			responseStructure.setData(dao.saveFoodOrder(foodOrder));
 		} else {
 
@@ -77,7 +77,7 @@ public class FoodOrderService {
 
 		if (foodOrder != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("saved");
+			responseStructure.setMessage("received");
 			responseStructure.setData(dao.getFoodOrderById(id));
 		} else {
 			throw new NoSuchIdFoundException("cannot get no id found");
@@ -94,7 +94,7 @@ public class FoodOrderService {
 		FoodOrder foodOrder = dao.getFoodOrderById(id);
 		if (foodOrder != null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("saved");
+			responseStructure.setMessage("deleted");
 			responseStructure.setData(dao.deleteFoodOrderById(id));
 		} else {
 			throw new NoSuchIdFoundException("cannot get no id found");

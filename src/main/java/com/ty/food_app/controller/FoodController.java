@@ -1,7 +1,7 @@
 package com.ty.food_app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,31 +16,57 @@ import com.ty.food_app.service.FoodOrderService;
 import com.ty.food_app.dto.FoodOrder;
 import com.ty.food_app.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("foodorder")
 public class FoodController {
 
 	@Autowired
 	FoodOrderService foodOrderService;
-
-	@PostMapping
+    
+	
+	@ApiOperation(value = "save foodorder", notes = "its used to save foodorde ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 404, message = "not found"),
+			@ApiResponse(code = 500, message = "internal Server Error") })
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<FoodOrder>> saveFoodOrder(@RequestBody FoodOrder foodOrder) {
 		return foodOrderService.saveFoodOrder(foodOrder);
 	}
-
-	@GetMapping
+	
+	@ApiOperation(value = "get foodorder", notes = "its used to get foodorde ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 404, message = "not found"),
+			@ApiResponse(code = 500, message = "internal Server Error") })
+	@GetMapping(produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<FoodOrder>> getFoodOrder(@RequestParam int id) {
 		return foodOrderService.getFoodOrder(id);
 
 	}
-	@DeleteMapping
+	
+	@ApiOperation(value = "delete foodorder", notes = "its used to delete foodorde ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 404, message = "not found"),
+			@ApiResponse(code = 500, message = "internal Server Error") })
+	@DeleteMapping( produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<String>> deleteFoodOrder(@RequestParam int id) {
 		return foodOrderService.deleteFoodOrder(id);
 
 	}
 	
 	
-	@PutMapping
+	@ApiOperation(value = "update foodorder", notes = "its used to update foodorde ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
+			@ApiResponse(code = 404, message = "not found"),
+			@ApiResponse(code = 500, message = "internal Server Error") })
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<FoodOrder>> updateFoodOrder(@RequestBody FoodOrder foodOrder,@RequestParam int id) {
 		return foodOrderService.updateFoodOrder(foodOrder, id);
 	}
